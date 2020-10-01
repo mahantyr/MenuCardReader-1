@@ -11,4 +11,7 @@ app.route('/Eatery/:restName/:type')
 app.route('/Eatery/:restName/:type')
 .post(todoList.add_item_by_type);
 
+app.route('/Eatery/:restName/:type')
+.delete(todoList.delete_item_in_type);
+
 };
