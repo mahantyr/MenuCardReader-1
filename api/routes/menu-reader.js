@@ -167,10 +167,10 @@ exports.get_menu_type = function(req, res) {
                         var type = item.Eatery.Menus[i].Menu.Type;
                         if(type.indexOf(reqtype)>-1)
                         {
-                            if(name == null || price == null || description == null){
-                                flag = 0;
-                                res.send('Request body argument contains undefined in property or wrong request body given');
-                            }
+//                             if(name == null || price == null || description == null){
+//                                 flag = 0;
+//                                 res.send('Request body argument contains undefined in property or wrong request body given');
+//                             }
                                 
                                 for (var j = 0; j < item.Eatery.Menus[i].Menu.Items.length; j++) {
                                     var itemName = item.Eatery.Menus[i].Menu.Items[j].name;
