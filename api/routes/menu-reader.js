@@ -67,6 +67,7 @@ exports.get_menu_type = function(req, res) {
 
   exports.add_item_by_type = function(req, res) {
     console.log("HTTP Get Item by Type Request");
+    console.log(req);
     var name = req.body.name;
     var price = req.body.price;
     var description = req.body.description;
