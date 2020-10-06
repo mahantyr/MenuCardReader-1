@@ -79,7 +79,7 @@ exports.get_menu_type = function(req, res) {
     var response = '';
     var flag = 1;
     var menuReference = db.ref("/Eateries");
-    
+    try{
     menuReference.once("value", snap => {
         var restaurant= snap.val();
         restaurant.forEach(function(item){
@@ -141,6 +141,10 @@ exports.get_menu_type = function(req, res) {
         
         
     });
+    }
+      catch (err){
+          res.send('Error in firebase');
+      }
     
     
 
