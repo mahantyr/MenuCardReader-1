@@ -67,6 +67,7 @@ exports.get_menu_type = function(req, res) {
 
   exports.add_item_by_type = function(req, res) {
     console.log("HTTP Get Item by Type Request");
+    console.log(req);
     var name = req.body.name;
     var price = req.body.price;
     var description = req.body.description;
@@ -78,7 +79,7 @@ exports.get_menu_type = function(req, res) {
     var response = '';
     var flag = 1;
     var menuReference = db.ref("/Eateries");
-    
+    try{
     menuReference.once("value", snap => {
         var restaurant= snap.val();
         restaurant.forEach(function(item){
@@ -97,6 +98,10 @@ exports.get_menu_type = function(req, res) {
                                 dict['name'] = name;
                                 dict['price'] = price;
                                 dict['description'] = description;
+                                if(name == null || price == null || description == null){
+                                    flag = 0;
+                                    res.send('Request body argument contains undefined in property or wrong request body given');
+                                }
                                 item.Eatery.Menus[i].Menu.Items.push(dict);
                                 // console.log(lst);
                                 lst = restaurant;
@@ -136,6 +141,10 @@ exports.get_menu_type = function(req, res) {
         
         
     });
+    }
+      catch (err){
+          res.send('Error in firebase');
+      }
     
     
 
@@ -163,6 +172,10 @@ exports.get_menu_type = function(req, res) {
                         var type = item.Eatery.Menus[i].Menu.Type;
                         if(type.indexOf(reqtype)>-1)
                         {
+//                             if(name == null || price == null || description == null){
+//                                 flag = 0;
+//                                 res.send('Request body argument contains undefined in property or wrong request body given');
+//                             }
                                 
                                 for (var j = 0; j < item.Eatery.Menus[i].Menu.Items.length; j++) {
                                     var itemName = item.Eatery.Menus[i].Menu.Items[j].name;
