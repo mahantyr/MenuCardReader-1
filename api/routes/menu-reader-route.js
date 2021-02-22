@@ -11,6 +11,9 @@ app.route('/Eatery/:restNameID')
 app.route('/Eatery/:restNameID')
 .post(todoList.add_menu_type); 
 
+app.route('/Eatery/:restNameID')
+.put(todoList.update_eatery_schedule);
+
 app.route('/Eatery/:restNameID/:type')
 .put(todoList.update_menu_type); 
 
