@@ -311,6 +311,7 @@ catch (err){
 
   };
 
+//Delete item in a type
     exports.delete_item_by_type = function(req, res) {
     console.log("HTTP Item by Type Request");
 
@@ -386,6 +387,7 @@ catch (err){
 
   };
 
+//Delete menu type in eatery
   exports.delete_menu_type = function(req, res) {
     console.log("HTTP Item by Type Request");
 
@@ -455,6 +457,7 @@ catch (err){
 
   };
 
+//Update schedule of eatery
   exports.update_eatery_schedule = function(req, res) {
     console.log("HTTP Item by Type Request");
 
@@ -582,7 +585,7 @@ exports.update_menu_type = function(req, res) {
 
 
 
-
+//Update item in a particular type
   exports.update_item_by_type = function(req, res) {
     console.log("HTTP Item by Type Request");
     var name = req.body.name;
