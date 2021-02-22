@@ -455,6 +455,60 @@ catch (err){
 
   };
 
+  exports.update_eatery_schedule = function(req, res) {
+    console.log("HTTP Item by Type Request");
+
+    var start = req.body.start;
+    var end = req.body.end;
+
+    var restID = req.params.restNameID;
+    var lst = [];
+    var flag = 0;
+
+    try{
+        var menuReference = db.ref("/Eateries");
+        menuReference.once("value", snap => {
+            var restaurant= snap.val();
+            if(restaurant==null){
+                return res.send('Error in firebase');
+            }
+            restaurant.forEach(function(item){
+                if(item.Eatery.id==restID)
+                {
+                    item.Eatery.schedule.StartTime =start;
+                    item.Eatery.schedule.EndTime = end;
+                    flag = 1;
+                    lst = restaurant;
+                }
+            });
+
+            if (flag == 1){
+                flag = 0;
+                //console.log("List present:"+lst);
+                menuReference.set(lst, 
+                    function(error) {
+                    if (error) {
+                        return res.send("Eatery could not be updated.\n" + error);
+                    } 
+                    else {
+                        return res.send("Eatery updated successfully.\n");
+                    }
+                });
+            }
+            else{
+                //console.log('Stop');
+                return res.send("Eatery not found.\n");
+            }
+            
+            
+        });
+    }
+    catch (err){
+        res.send('Error in firebase');
+    }
+    
+};  
+
 //Update Menu Type
 exports.update_menu_type = function(req, res) {
     console.log("HTTP Item by Type Request");
@@ -613,6 +667,3 @@ catch (err){
     
 
   };
-  
-
-
